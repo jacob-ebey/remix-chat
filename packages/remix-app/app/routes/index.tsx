@@ -169,6 +169,7 @@ export default function Index() {
 									>
 										GitHub
 									</a>
+									.
 								</p>
 							</div>
 						</div>
