@@ -16,6 +16,11 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.7.0
+
       - name: 📥 Install deps
         uses: bahmutov/npm-install@v1
 
