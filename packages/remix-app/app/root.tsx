@@ -253,6 +253,17 @@ function Layout({ children }: { children: React.ReactNode }) {
 										Home
 									</NavLink>
 								</li>
+								<li>
+									<a
+										href="https://github.com/jacob-ebey/remix-chat"
+										rel="noopener noreferrer"
+										target="_blank"
+										className="bg-primary-700 lg:text-primary-700 bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mr-2 block whitespace-nowrap rounded-lg px-4 py-2 pr-4 pl-3 text-sm font-medium text-gray-900 focus:outline-none focus:ring-4 dark:text-white lg:bg-transparent lg:p-0 lg:px-5 lg:py-2.5"
+										onClick={closeMenu}
+									>
+										Source
+									</a>
+								</li>
 							</ul>
 						</div>
 					</div>
