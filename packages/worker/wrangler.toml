@@ -1,6 +1,7 @@
 compatibility_date = "2022-05-22"
 main = "src/index.ts"
 name = "remix-chat"
+account_id = "574fdb1eae7e80782a805c4b92f6b626"
 workers_dev = true
 
 [site]
