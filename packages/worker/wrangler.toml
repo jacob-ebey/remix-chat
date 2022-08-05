@@ -1,0 +1,18 @@
+compatibility_date = "2022-05-22"
+main = "src/index.ts"
+name = "remix-chat"
+workers_dev = true
+
+[site]
+bucket = "../remix-app/public"
+
+[durable_objects]
+bindings = [
+  {name = "CHAT_ROOM", class_name = "ChatRoomDurableObject"},
+  {name = "RATE_LIMITER", class_name = "RateLimiterDurableObject"},
+  {name = "USER", class_name = "UserDurableObject"},
+]
+
+[[migrations]]
+new_classes = ["ChatRoomDurableObject", "RateLimiterDurableObject", "UserDurableObject"]
+tag = "v1"

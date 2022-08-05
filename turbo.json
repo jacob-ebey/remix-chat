@@ -1,0 +1,17 @@
+{
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["build/**", "public/build/**", ".cache/**"]
+    },
+    "dev": {
+      "cache": false
+    },
+    "lint": {
+      "outputs": []
+    },
+    "typecheck": {
+      "outputs": ["tsconfig.tsbuildinfo"]
+    }
+  }
+}

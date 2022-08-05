@@ -1,0 +1,42 @@
+{
+  "name": "remix-app",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./build/index.js",
+  "types": "./build.d.ts",
+  "scripts": {
+    "build:css": "tailwindcss -m -i styles/app.css -o app/styles/app.css",
+    "build:remix": "remix build",
+    "build": "run-s build:*",
+    "dev": "concurrently \"npm:dev:css\" \"npm:dev:remix\"",
+    "dev:css": "tailwindcss -m -i styles/app.css -o app/styles/app.css --watch",
+    "dev:remix": "cross-env REMIX_DEV_SERVER_WS_PORT=8002 remix watch",
+    "lint": "eslint .",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "@remix-run/cloudflare": "0.0.0-experimental-9a34bfcbe",
+    "@remix-run/react": "0.0.0-experimental-9a34bfcbe",
+    "classnames": "^2.3.1",
+    "flowbite-react": "^0.1.5",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-use-websocket": "^4.2.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^3.10.0",
+    "@remix-run/dev": "0.0.0-experimental-9a34bfcbe",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.4",
+    "cloudflare-env": "*",
+    "concurrently": "^7.2.1",
+    "eslint": "^8.15.0",
+    "eslint-config-custom": "*",
+    "flowbite": "^1.5.1",
+    "npm-run-all": "^4.1.5",
+    "tailwindcss": "^3.0.24",
+    "tsconfig": "*",
+    "typescript": "^4.6.4",
+    "user-do": "*"
+  }
+}
