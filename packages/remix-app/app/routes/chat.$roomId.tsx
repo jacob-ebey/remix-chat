@@ -105,111 +105,115 @@ export default function ChatRoom() {
 	};
 
 	return (
-		<div className="p:2 mx-auto flex max-w-4xl flex-1 flex-col justify-between sm:p-6">
-			<div className="mb-2 px-4 pt-4">
-				<form className="relative flex" onSubmit={handleSendMessage}>
-					<input
-						ref={messageInputRef}
-						disabled={!readyToSendMessages}
-						type="text"
-						placeholder="Write your message!"
-						className="w-full bg-gray-200  py-3 text-gray-600 placeholder-gray-600 focus:placeholder-gray-400 focus:outline-none"
-					/>
-					<div className="inset-y-0 right-0 hidden items-center sm:flex">
-						<button
-							type="submit"
-							className="inline-flex items-center justify-center bg-blue-500 px-4 py-3 text-white transition duration-500 ease-in-out hover:bg-blue-400 focus:outline-none"
-						>
-							<span className="font-bold">Send</span>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 20 20"
-								fill="currentColor"
-								className="ml-2 h-6 w-6 rotate-90 transform"
-							>
-								<path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-							</svg>
-						</button>
-					</div>
-				</form>
-			</div>
-			<div
-				id="messages"
-				className="scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch flex flex-col space-y-4 p-3"
-			>
-				{messages.map((message, idx) => {
-					let key = `${idx}-${message.type}-${message.text}-${
-						(message as any).from || ""
-					}`;
-					switch (message.type) {
-						case "event":
-							return (
-								<div key={key} className="chat-message">
-									<div className="flex items-end">
-										<div className="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs">
-											<div>
-												<span className="inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600">
-													{message.text}
-												</span>
+		<div className="flex flex-1 flex-col bg-gray-50 dark:bg-gray-900">
+			<div className="mx-auto flex w-full max-w-4xl flex-1 flex-col justify-between p-2 sm:p-6">
+				<div className="relative flex-1">
+					<div
+						id="messages"
+						className="absolute inset-0 flex flex-1 flex-col-reverse overflow-y-auto p-3"
+					>
+						{messages.map((message, idx) => {
+							let key = `${idx}-${message.type}-${message.text}-${
+								(message as any).from || ""
+							}`;
+							switch (message.type) {
+								case "event":
+									return (
+										<div key={key} className="event-message mt-4">
+											<div className="flex items-end">
+												<div className="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs">
+													<div>
+														<span className="inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600">
+															{message.text}
+														</span>
+													</div>
+												</div>
+												<svg
+													aria-label="Bot"
+													className="order-1 h-6 w-6 rounded-full"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke="currentColor"
+													strokeWidth="2"
+												>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														d="M13 10V3L4 14h7v7l9-11h-7z"
+													/>
+												</svg>
 											</div>
 										</div>
-										<svg
-											aria-label="Bot"
-											className="order-1 h-6 w-6 rounded-full"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor"
-											strokeWidth="2"
-										>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												d="M13 10V3L4 14h7v7l9-11h-7z"
-											/>
-										</svg>
-									</div>
-								</div>
-							);
-						case "message":
-							if (message.from === username) {
-								return (
-									<div className="chat-message" key={key}>
-										<div className="flex items-end justify-end">
-											<div className="order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs">
-												<div>
-													<span className="inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-base text-white ">
-														{message.text}
-													</span>
+									);
+								case "message":
+									if (message.from === username) {
+										return (
+											<div className="self-message mt-4" key={key}>
+												<div className="flex items-end justify-end">
+													<div className="order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs">
+														<div>
+															<span className="inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-base text-white ">
+																{message.text}
+															</span>
+														</div>
+													</div>
+													<div className="order-1 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white">
+														{message.from.charAt(0)}
+													</div>
 												</div>
 											</div>
-											<div className="order-1 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white">
-												{message.from.charAt(0)}
+										);
+									}
+									return (
+										<div className="chat-message mt-4" key={key}>
+											<div className="flex items-end">
+												<div className="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs">
+													<div>
+														<div className="text-sm">{message.from}</div>
+														<span className="inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-base text-gray-600">
+															{message.text}
+														</span>
+													</div>
+												</div>
+												<div className="order-1 flex h-6 w-6 items-center justify-center rounded-full bg-gray-300 text-gray-600">
+													{message.from.charAt(0)}
+												</div>
 											</div>
 										</div>
-									</div>
-								);
+									);
+								default:
+									return null;
 							}
-							return (
-								<div className="chat-message" key={key}>
-									<div className="flex items-end">
-										<div className="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs">
-											<div>
-												<div className="text-sm">{message.from}</div>
-												<span className="inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-base text-gray-600">
-													{message.text}
-												</span>
-											</div>
-										</div>
-										<div className="order-1 flex h-6 w-6 items-center justify-center rounded-full bg-gray-300 text-gray-600">
-											{message.from.charAt(0)}
-										</div>
-									</div>
-								</div>
-							);
-						default:
-							return null;
-					}
-				})}
+						})}
+					</div>
+				</div>
+				<div className="mb-2 px-4 pt-4">
+					<form className="relative flex" onSubmit={handleSendMessage}>
+						<input
+							ref={messageInputRef}
+							disabled={!readyToSendMessages}
+							type="text"
+							placeholder="Write your message!"
+							className="w-full bg-gray-200  py-3 text-gray-600 placeholder-gray-600 focus:placeholder-gray-400 focus:outline-none"
+						/>
+						<div className="inset-y-0 right-0 hidden items-center sm:flex">
+							<button
+								type="submit"
+								className="inline-flex items-center justify-center bg-blue-500 px-4 py-3 text-white transition duration-500 ease-in-out hover:bg-blue-400 focus:outline-none"
+							>
+								<span className="font-bold">Send</span>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 20 20"
+									fill="currentColor"
+									className="ml-2 h-6 w-6 rotate-90 transform"
+								>
+									<path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+								</svg>
+							</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	);

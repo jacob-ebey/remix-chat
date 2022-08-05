@@ -141,7 +141,7 @@ function Document({
 				<Meta />
 				<Links />
 			</head>
-			<body>
+			<body className="flex h-screen w-screen flex-col">
 				{children}
 				<ScrollRestoration />
 				<Scripts />
